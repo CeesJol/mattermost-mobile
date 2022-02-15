@@ -3,13 +3,13 @@
 
 import React from 'react';
 
-import {renderWithIntl} from '@test/intl-test-helper';
+import {render} from '@test/intl-test-helper';
 
 import Header from './header';
 
 describe('components/channel_list/header', () => {
     it('Channel List Header Component should match snapshot', () => {
-        const {toJSON} = renderWithIntl(
+        const {toJSON} = render(
             <Header displayName={'Test!'}/>,
         );
 

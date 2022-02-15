@@ -2,16 +2,13 @@
 // See LICENSE.txt for license information.
 
 import React, {useEffect} from 'react';
-import {useIntl} from 'react-intl';
 import {Text, View} from 'react-native';
 import Animated, {useAnimatedStyle, useSharedValue, withTiming} from 'react-native-reanimated';
 
 import CompassIcon from '@components/compass_icon';
 import TouchableWithFeedback from '@components/touchable_with_feedback';
-import {Screens} from '@constants';
 import {useServerDisplayName} from '@context/server';
 import {useTheme} from '@context/theme';
-import {showModal} from '@screens/navigation';
 import {changeOpacity, makeStyleSheetFromTheme} from '@utils/theme';
 import {typography} from '@utils/typography';
 
@@ -64,15 +61,12 @@ const ChannelListHeader = ({displayName, iconPad}: Props) => {
         marginLeft: withTiming(marginLeft.value, {duration: 350}),
     }), []);
 
-    const intl = useIntl();
-
     useEffect(() => {
         marginLeft.value = iconPad ? 44 : 0;
     }, [iconPad]);
 
     return (
         <Animated.View style={animatedStyle}>
-            {Boolean(displayName) &&
             <View style={styles.headerRow}>
                 <View style={styles.headerRow}>
                     <Text style={styles.headingStyles}>
@@ -89,17 +83,9 @@ const ChannelListHeader = ({displayName, iconPad}: Props) => {
                     <CompassIcon
                         style={styles.plusIcon}
                         name={'plus'}
-                        onPress={async () => {
-                            const title = intl.formatMessage({id: 'browse_channels.title', defaultMessage: 'More Channels'});
-                            const closeButton = await CompassIcon.getImageSource('close', 24, theme.sidebarHeaderTextColor);
-                            showModal(Screens.BROWSE_CHANNELS, title, {
-                                closeButton,
-                            });
-                        }}
                     />
                 </TouchableWithFeedback>
             </View>
-            }
             <Text style={styles.subHeadingStyles}>
                 {serverDisplayName}
             </Text>
