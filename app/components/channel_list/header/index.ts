@@ -4,7 +4,7 @@
 import {withDatabase} from '@nozbe/watermelondb/DatabaseProvider';
 import withObservables from '@nozbe/with-observables';
 import {of as of$} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, catchError} from 'rxjs/operators';
 
 import {MM_TABLES, SYSTEM_IDENTIFIERS} from '@constants/database';
 
@@ -18,6 +18,7 @@ import type TeamModel from '@typings/database/models/servers/team';
 const withCurrentTeam = withObservables([], ({database}: WithDatabaseArgs) => {
     const team = database.get<SystemModel>(SYSTEM).findAndObserve(SYSTEM_IDENTIFIERS.CURRENT_TEAM_ID).pipe(
         switchMap((id) => database.get<TeamModel>(TEAM).findAndObserve(id.value)),
+        catchError(() => of$({displayName: ''})),
     );
 
     return {

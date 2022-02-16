@@ -8,7 +8,7 @@ import {MM_TABLES} from '@app/constants/database';
 import {renderWithIntlAndTheme} from '@test/intl-test-helper';
 import TestHelper from '@test/test_helper';
 
-import CategoryHeader from './';
+import CategoryHeader from './header';
 
 import type CategoryModel from '@typings/database/models/servers/category';
 
@@ -30,6 +30,7 @@ describe('components/channel_list/categories/header', () => {
         const wrapper = renderWithIntlAndTheme(
             <CategoryHeader
                 category={category}
+                hasChannels={true}
             />,
         );
         expect(wrapper.toJSON()).toMatchSnapshot();

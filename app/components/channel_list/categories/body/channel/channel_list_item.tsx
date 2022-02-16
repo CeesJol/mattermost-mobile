@@ -50,8 +50,6 @@ const ChannelListItem = ({channel, myChannel}: Props) => {
     const styles = getStyleSheet(theme);
     const serverUrl = useServerUrl();
 
-    // const {unreadCount, highlight, name, icon} = props;
-
     // Make it brighter if it's highlighted, or has unreads
     const bright = false;
 

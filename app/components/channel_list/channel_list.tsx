@@ -64,8 +64,6 @@ const ChannelList = ({iconPad, isTablet, teamsCount, currentTeamId}: ChannelList
             <Categories
                 currentTeamId={currentTeamId}
             />
-
-            {/* <Loading/> */}
         </Animated.View>
     );
 };
